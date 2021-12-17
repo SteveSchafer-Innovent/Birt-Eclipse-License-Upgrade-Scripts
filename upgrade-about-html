@@ -1,0 +1,26 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+DIR="$1"
+if [ -z "$DIR" ]; then
+	DIR="$BIRT"
+fi
+echo "searching in $DIR"
+shift 1
+TEST="$1"
+FILES=$(find "$DIR" -name about.html)
+SEARCH="Eclipse(\n| )+Public(\n| )+License(\n| )+Version(\n| )+1.0"
+FILES=$(for FILE in $FILES; do pcregrep -l -M "$SEARCH" "$FILE"; done)
+for FILE in $FILES; do
+	if ! grep -q "<h3>License" "$FILE"; then
+		echo "<h3>License not found in $FILE"
+	else
+		if [ -z "$TEST" ]; then
+			BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+			mv "$FILE" "$BACKUP_FILE"
+			awk -f about.html.awk epl2/about.html.fragment "$BACKUP_FILE" > "$FILE" && rm "$BACKUP_FILE"
+		else
+			awk -f about.html.awk epl2/about.html.fragment "$FILE"
+		fi
+	fi
+done

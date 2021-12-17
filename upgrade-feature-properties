@@ -1,0 +1,22 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+DIR="$1"
+if [ -z "$DIR" ]; then
+	DIR="$BIRT"
+fi
+echo "searching in $DIR"
+shift 1
+TEST="$1"
+FILES=$(find "$DIR" -name "*.properties")
+FILES=$(for FILE in $FILES; do grep -l "license=" $FILE; done)
+for FILE in $FILES; do
+	if [ -z "$TEST" ]; then
+		BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+		mv "$FILE" "$BACKUP_FILE"
+		awk -f feature.properties.awk epl2/feature.properties.fragment "$BACKUP_FILE" > "$FILE" && rm "$BACKUP_FILE"
+	else
+		echo " file - $FILE"
+		awk -f feature.properties.awk epl2/feature.properties.fragment "$FILE"
+	fi
+done

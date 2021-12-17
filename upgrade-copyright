@@ -1,0 +1,27 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+FILETYPE="$1"
+shift 1
+DIR="$1"
+if [ -z "$DIR" ]; then
+	DIR="$BIRT"
+fi
+echo "searching in $DIR"
+shift 1
+TEST="$1"
+FILES=$(find "$DIR" -name "*.$FILETYPE")
+SEARCH="Copyright (c)"
+for FILE in $FILES; do
+	if [ -z "$TEST" ]; then
+		BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+		mv "$FILE" "$BACKUP_FILE"
+		awk -v filetype=$FILETYPE\
+		 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"\
+		 && rm "$BACKUP_FILE"
+	else
+		echo " file - $FILE"
+		awk -v filetype=$FILETYPE\
+		 -f copyright.awk epl2/license-comment.txt "$FILE"
+	fi
+done

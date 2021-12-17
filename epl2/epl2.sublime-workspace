@@ -1,0 +1,664 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sel",
+				"selectionList"
+			],
+			[
+				"r",
+				"roundDailyHoursTo"
+			],
+			[
+				"min",
+				"minimumBillableHours"
+			],
+			[
+				"Interceptor",
+				"HTTP_INTERCEPTORS"
+			],
+			[
+				"linkSour",
+				"linkSourceAttrDefnId\tproperty"
+			],
+			[
+				"tar",
+				"targetAttrDefnId\tproperty"
+			],
+			[
+				"can",
+				"canDeleteProject\tmethod"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "epl-2.0.html",
+			"settings":
+			{
+				"buffer_size": 17300,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					3,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAlEMAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"file": "/disk1/home/innovent/git/birt-fork/birt/engine/org.eclipse.birt.report.engine.emitter.odp/src/org/eclipse/birt/report/engine/emitter/odp/OdpWriter.java",
+			"settings":
+			{
+				"buffer_size": 9684,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.osgi.runtime.sdk/feature.xml",
+			"settings":
+			{
+				"buffer_size": 845,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.osgi.runtime.sdk/feature.properties",
+			"settings":
+			{
+				"buffer_size": 9698,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "feature.properties.fragment",
+			"settings":
+			{
+				"buffer_size": 8148,
+				"encoding": "UTF-8",
+				"line_ending": "Unix",
+				"name": "##################################################"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAApSUAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					16,
+					1,
+					"right_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAADRBQAAIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIENvcHlyaWdodCAoYykgMjAxMCBDb21wb3NlbnQgSW5jLiwgYW5kIG90aGVycy4KIyBBbGwgcmlnaHRzIHJlc2VydmVkLiBUaGlzIHByb2dyYW0gYW5kIHRoZSBhY2NvbXBhbnlpbmcgbWF0ZXJpYWxzCiMgYXJlIG1hZGUgYXZhaWxhYmxlIHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgRWNsaXBzZSBQdWJsaWMgTGljZW5zZSB2MS4wCiMgd2hpY2ggYWNjb21wYW5pZXMgdGhpcyBkaXN0cmlidXRpb24sIGFuZCBpcyBhdmFpbGFibGUgYXQKIyBodHRwOi8vd3d3LmVjbGlwc2Uub3JnL2xlZ2FsL2VwbC12MTAuaHRtbAojCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKCiMgQ2hhbmdlIE9zY2lsbG9zY29wZSB0byB5b3VyIHdpZGdldCBuYW1lCmZlYXR1cmVOYW1lPU5lYnVsYSBPc2NpbGxvc2NvcGUgV2lkZ2V0CgojIExlYXZlIHRoaXMgZm9yIGFsbCBOZWJ1bGEgV2lkZ2V0cwpwcm92aWRlcj1FY2xpcHNlIE5lYnVsYQoKIyAibGljZW5zZVVSTCIgcHJvcGVydHkgLSBVUkwgb2YgdGhlICJGZWF0dXJlIExpY2Vuc2UiCiMgZG8gbm90IHRyYW5zbGF0ZSB2YWx1ZSAtIGp1c3QgY2hhbmdlIHRvIHBvaW50IHRvIGEgbG9jYWxlLXNwZWNpZmljIEhUTUwgcGFnZQpsaWNlbnNlVVJMPWxpY2Vuc2UuaHRtbAoKIyAiZmVhdHVyZURlc2NyaXB0aW9uVVJMIiBwcm9wZXJ0eSAtIFVSTCBvZiB0aGUgIkZlYXR1cmUgRGVzY3JpcHRpb24iCiMgZG8gbm90IHRyYW5zbGF0ZSB2YWx1ZSAtIGp1c3QgY2hhbmdlIHRvIHBvaW50IHRvIGEgbG9jYWxlLXNwZWNpZmljIEhUTUwgcGFnZQpmZWF0dXJlRGVzY3JpcHRpb25VUkw9aHR0cDovL3d3dy5lY2xpcHNlLm9yZy9uZWJ1bGEvd2lkZ2V0cy9vc2NpbGxvc2NvcGUvb3NjaWxsb3Njb3BlLnBocAoKIyAiZmVhdHVyZURlc2NyaXB0aW9uVGV4dCIgcHJvcGVydHkgLSBVUkwgb2YgdGhlICJGZWF0dXJlIERlc2NyaXB0aW9uIgojIGRvIG5vdCB0cmFuc2xhdGUgdmFsdWUgLSBqdXN0IGNoYW5nZSB0byBwb2ludCB0byBhIGxvY2FsZS1zcGVjaWZpYyBIVE1MIHBhZ2UKZmVhdHVyZURlc2NyaXB0aW9uVGV4dD1cCkFuIGFuaW1hdGVkIFNXVCB3aWRnZXQgdGhhdCBjYW4gYmUgdXNlZCB0byBtb25pdG9yIHByb2Nlc3Nlcy5cbgpUaGUgd2lkZ2V0IGlzIGVhc3kgdG8gaW1wbGVtZW50IHdpdGggdGhlIHByb3ZpZGVkIGFic3RyYWN0IGRpc3BhdGNoZXIuXG4gCkl0IGlzIGZ1biwgdmVyc2F0aWxlIGFuZCB2ZXJ5IGNvbmZpZ3VyYWJsZS4gLgoKIyAibGljZW5zZSIgcHJvcGVydHkgLSB0ZXh0IG9mIHRoZSAiRmVhdHVyZSBVcGRhdGUgTGljZW5zZSIKIyBzaG91bGQgYmUgcGxhaW4gdGV4dCB2ZXJzaW9uIG9mIGxpY2Vuc2UgYWdyZWVtZW50IHBvaW50ZWQgdG8gYmUgImxpY2Vuc2VVUkwiCg",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAANEFAAAAAAAAAAAAAAAAAAA"
+				]
+			]
+		},
+		{
+			"file": "/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.tests.feature/license.html",
+			"settings":
+			{
+				"buffer_size": 9587,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/disk1/home/innovent/git/birt-fork/birt/engine/org.eclipse.birt.report.engine.emitter.config.pdf/about.html",
+			"settings":
+			{
+				"buffer_size": 1433,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"markdown",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Code Folding: Unfold All"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/disk1/home/innovent/git/birt-fork",
+		"/disk1/home/innovent/git/birt-fork/epl2"
+	],
+	"file_history":
+	[
+		"/disk1/home/innovent/git/birt-fork/epl2/license.html",
+		"/disk1/home/innovent/projects/react-timesheet/src/DuplicateEvent.jsx",
+		"/disk1/home/innovent/projects/react-timesheet/src/DeleteEvent.jsx",
+		"/disk1/home/innovent/projects/react-timesheet/src/LoginForm.jsx",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/service/api.service.ts",
+		"/disk1/home/innovent/git/birt-fork/birt/build.log",
+		"/disk1/home/innovent/git/birt-fork/build.log",
+		"/disk1/home/innovent/git/birt-clone/build.err.log",
+		"/disk1/home/innovent/.m2/settings.xml",
+		"/disk1/home/innovent/projects/timesheet-client/run",
+		"/disk1/home/innovent/git/birt-clone/build",
+		"/disk1/home/innovent/git/birt-clone/build.log",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/event/edit-event/edit-event.component.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/event/edit-event/edit-event.component.html",
+		"/disk1/home/innovent/projects/react-timesheet/package.json",
+		"/disk1/home/innovent/projects/react-timesheet/src/pages/Events.js",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/login/login.component.ts",
+		"/disk1/home/innovent/projects/react-timesheet/src/index.js",
+		"/disk1/home/innovent/projects/react-timesheet/src/Car.js",
+		"/disk1/home/innovent/projects/react-timesheet/src/MyForm.js",
+		"/disk1/home/innovent/projects/react-timesheet/src/pages/Home.js",
+		"/disk1/home/innovent/projects/react-timesheet/src/pages/Blogs.js",
+		"/disk1/home/innovent/projects/react-timesheet/src/pages/Contact.js",
+		"/disk1/home/innovent/projects/react-timesheet/public/MyForm.js",
+		"/disk1/home/innovent/projects/react-timesheet/src/App.js",
+		"/disk1/home/innovent/test/jetty/jetty-base/start.d/http.ini",
+		"/disk1/home/innovent/test/jetty/jetty-app/pom.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/eclipse",
+		"/external2/backup/innovent/restic_backups/daily-google",
+		"/external2/backup/innovent/restic_backups/daily_google",
+		"/disk5/home/innovent/eclipse/rcp-2020-06/eclipse/eclipse.ini",
+		"/disk5/home/innovent/git/birt-fork/eclipse",
+		"/disk5/home/innovent/git/birt-fork/eclipse-test",
+		"/disk5/home/innovent/eclipse/rcp-2020-06/eclipse/configuration/config.ini",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/bigtime/entry/list.ts",
+		"/disk1/home/innovent/projects/timesheet-api/logs/run-timesheet.log",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/service/bigtime.service.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/core/interceptor.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/report/week/week-report.component.html",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/report/week/week-report.component.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/bigtime/login/login.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/bigtime/login/login.html",
+		"/disk1/home/innovent/projects/angular-bigtime/src/app/app.routing.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/app.routing.ts",
+		"/disk1/home/innovent/projects/angular-bigtime/src/app/app.module.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/app.module.ts",
+		"/disk1/home/innovent/projects/angular-bigtime/src/app/service/bigtime.service.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/project/edit-project/edit-project.component.html",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/project/edit-project/edit-project.component.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/app.component.html",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/core/bigtime.interceptor.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/bigtime/project/list.ts",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.api/build.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.build/externalRepo.properties",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.build/src/org/eclipse/birt/build/ExportManifestUtils.java",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.build/BuildMavenSource.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/engine/org.eclipse.birt.report.engine/src/org/eclipse/birt/report/engine/util/ExportManifestUtils.java",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.rcp.feature/install.txt",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.w3c.sac/META-INF/MANIFEST.MF",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.w3c.sac/about.html",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.w3c.sac/.classpath",
+		"/disk1/home/innovent/git/birt-fork/deploy-local",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.apache.axis/META-INF/MANIFEST.MF",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.osgi.runtime/feature.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.chart.osgi.runtime/pom.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.chart.osgi.runtime/feature.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.feature/pom.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.feature/feature.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.rcp.feature/feature.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/releng/maps/orbit_bundles.map",
+		"/disk1/home/innovent/git/birt-fork/birt/build/birt-packages/birt-runtime-osgi/build.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.build/externalRepo-viewservlets.properties",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.releng.birtbuilder/eclipse/buildConfigs/birt/tools/BIRTDownloadSetup.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/common/pom.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.apache.axis/pom.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.apache.axis/.project",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.apache.axis/lib/log4j.properties",
+		"/disk1/home/innovent/git/birt-fork/birt/pom.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/UI/org.eclipse.birt.report.designer.ui.rcp/BIRT.product",
+		"/disk1/home/innovent/git/birt-fork/birt/UI/org.eclipse.birt.report.designer.ui.rcp/BIRT-headless.product",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.axis.overlay/src/org/eclipse/birt/axis/utility/UTF8Encoder.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.axis.overlay/META-INF/MANIFEST.MF",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/customBuildCallbacks.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/WebViewerPackager.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/META-INF/MANIFEST.MF",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/server-config.wsdd",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/BirtQueryExportActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/BirtGetReportletActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/AbstractBaseActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/BirtCustomerExtractDataActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/BirtGetTOCActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/AbstractChangeParameterActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/AbstractGetPageActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/AbstractQueryExportActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/service/actionhandler/BirtGetPageActionHandler.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/utility/BirtUtility.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/utility/PrintUtility.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/presentation/aggregation/layout/EngineFragment.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/presentation/aggregation/layout/FramesetFragment.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/soapengine/endpoint/BirtSoapBindingImpl.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/soapengine/endpoint/BirtSoapBindingStub.java",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/classes/org/eclipse/birt/report/soapengine/api/FilterClause.java",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.apache.axis/about.properties",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.apache.axis/about.html",
+		"/disk1/home/innovent/git/birt-fork/birt/common/org.apache.axis/.classpath",
+		"/disk1/home/innovent/git/birt-fork/birt/model/org.eclipse.birt.report.model/META-INF/MANIFEST.MF",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.sdk/pom.xml",
+		"/disk1/home/innovent/.ssh/config",
+		"/disk1/home/innovent/projects/timesheet-api/deploy",
+		"/disk1/home/innovent/projects/timesheet-api/.ssh/config",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/project/list-project/list-project.component.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/model/project.model.ts",
+		"/disk1/home/innovent/projects/angular-timesheet/src/app/report/week/week-report.component.css",
+		"/disk1/home/innovent/git/birt-fork/birt/build/org.eclipse.birt.target/org.eclipse.birt.target.target",
+		"/disk1/home/innovent/git/birt-fork/birt/chart/org.eclipse.birt.chart.device.pdf/META-INF/MANIFEST.MF",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.chart.feature/feature.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.engine.runtime/feature.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.report.designer.editor.xml.wtp.feature/feature.xml",
+		"/disk1/home/innovent/git/birt-fork/birt/viewer/org.eclipse.birt.report.viewer/birt/WEB-INF/web.xml",
+		"/disk1/home/innovent/projects/angular-timesheet/angular.json",
+		"/disk1/home/innovent/projects/angular-timesheet/src/environments/environment.dev-local.ts",
+		"/usr/local/bin/db-tunnel-is-active",
+		"/usr/local/bin/db-tunnel",
+		"/disk1/home/innovent/bin/db",
+		"/disk1/home/innovent/projects/timesheet-api/run",
+		"/disk1/home/innovent/projects/timesheet-api/run-local",
+		"/disk1/home/innovent/projects/angular-bigtime/src/app/bigtime/entry/list.html",
+		"/disk1/home/innovent/projects/angular-bigtime/src/app/bigtime/entry/list.ts"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			".html"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/disk1/home/innovent/git/birt-fork"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "epl-2.0.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17300,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15939,
+								15939
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4687.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/disk1/home/innovent/git/birt-fork/birt/engine/org.eclipse.birt.report.engine.emitter.odp/src/org/eclipse/birt/report/engine/emitter/odp/OdpWriter.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9684,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.osgi.runtime.sdk/feature.xml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 845,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.osgi.runtime.sdk/feature.properties",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9698,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1829,
+								1829
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/JavaProperties.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 489.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "feature.properties.fragment",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8148,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8069,
+								8069
+							]
+						],
+						"settings":
+						{
+							"auto_name": "##################################################",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2192.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/disk1/home/innovent/git/birt-fork/birt/features/org.eclipse.birt.tests.feature/license.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5120,
+								5125
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1508.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/disk1/home/innovent/git/birt-fork/birt/engine/org.eclipse.birt.report.engine.emitter.config.pdf/about.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1433,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 53.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 120.0
+	},
+	"output.find_results":
+	{
+		"height": 120.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 614.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 346.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

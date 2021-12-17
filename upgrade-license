@@ -1,0 +1,9 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+./upgrade-license-html "$@"
+./upgrade-epl-html "$@"
+./upgrade-feature-properties "$@"
+./upgrade-about-html "$@"
+./upgrade-copyright java "$@"
+./upgrade-copyright properties "$@"
+./upgrade-copyright xml "$@"

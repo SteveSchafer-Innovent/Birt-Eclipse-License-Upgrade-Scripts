@@ -1,0 +1,20 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+DIR="$1"
+if [ -z "$DIR" ]; then
+  DIR="$BIRT"
+fi
+echo "searching in $DIR"
+shift 1
+TEST="$1"
+FILES=$(find "$DIR" -name license.html)
+for FILE in $FILES; do
+  if [ -z "$TEST" ]; then
+    BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+    mv "$FILE" "$BACKUP_FILE"
+    cp epl2/license.html "$FILE"
+  else
+    echo "$FILE"
+  fi
+done
