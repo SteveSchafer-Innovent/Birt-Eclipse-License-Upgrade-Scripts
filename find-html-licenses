@@ -1,0 +1,17 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+DIR="$1"
+if [ -z "$DIR" ]; then
+	DIR="$BIRT"
+fi
+echo "searching in $DIR"
+FILES=$(find "$DIR"\
+ -name "*.html"\
+ -not -name "license.html"\
+ -not -name "about.html"\
+ -type f)
+SEARCH="Eclipse(\n| )+Public(\n| )+License(\n| )+(Version(\n| )|v)+1.0"
+for FILE in $FILES; do
+	# echo "file = $FILE"
+	pcregrep -l -M "$SEARCH" "$FILE" 2> find-licenses.err.log
+done

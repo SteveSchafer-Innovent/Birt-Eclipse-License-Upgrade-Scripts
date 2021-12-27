@@ -1,0 +1,27 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+DIR="$1"
+if [ -z "$DIR" ]; then
+	DIR="$BIRT"
+fi
+echo "searching in $DIR"
+shift 1
+TEST="$1"
+FILES=$(find "$DIR" -name package.html)
+SEARCH="Eclipse(\n| )+Public(\n| )+License(\n| )+(Version(\n| )|v)+1.0"
+FILES=$(for FILE in $FILES; do pcregrep -l -M "$SEARCH" "$FILE"; done)
+for FILE in $FILES; do
+	if ! grep -q "Copyright (c)" "$FILE"; then
+		echo "Copyright not found in $FILE"
+	else
+		if [ -z "$TEST" ]; then
+			BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+			mv "$FILE" "$BACKUP_FILE"
+			awk -f package.html.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE" && rm "$BACKUP_FILE"
+		else
+			echo " file - $FILE"
+			awk -f package.html.awk epl2/license-comment.txt "$FILE"
+		fi
+	fi
+done

@@ -72,7 +72,7 @@ BEGIN {
     # comment not found
     # insert new comment
     print firstLine;
-    print prefix "Copyright (c) 2021 Contributors to Eclipse Foundation"
+    print prefix "Copyright (c) 2021 Contributors to the Eclipse Foundation"
     print prefix ""
     for(i=0; i<newLineCount; i++) {
         line=lines[i];
@@ -88,7 +88,6 @@ BEGIN {
 ($0 ~ copyrightLineRegex) && (oldLineCount>=1) {
     # copyright found
     print $0;
-    print prefix "All rights reserved.";
     print prefix "";
     copyrightFound=1;
     oldLineCount=oldLineCount+1;
@@ -124,7 +123,6 @@ BEGIN {
 ($0 ~ lastLineRegex) && (oldLineCount>=2) {
     # last line of copyright comment
     # print "** found last line **";
-    print prefix " Others: See git history";
     print $0;
     oldLineCount=0;
     next;

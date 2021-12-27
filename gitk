@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ -z "$BIRT" ]; then
+	echo "Please define BIRT"
+	exit 1
+fi
+cd "$BIRT"
+gitk > ../gitk.log 2> ../gitk.err.log &
