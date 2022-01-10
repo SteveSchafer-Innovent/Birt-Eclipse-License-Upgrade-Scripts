@@ -25,6 +25,7 @@ BEGIN {
 }
 END {
     if(c==1) {
-        print "** end of license not found **";
+        print "** end of license not found **" > "/dev/stderr";
+        exit 1;
     }
 }

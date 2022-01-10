@@ -7,3 +7,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 ./upgrade-copyright java "$@"
 ./upgrade-copyright properties "$@"
 ./upgrade-copyright xml "$@"
+./upgrade-build-properties "$@"
+# must come after upgrade-copyright
+./upgrade-epl-urls "$@"
+./upgrade-license-text "$@"
+./upgrade-split-license-text "$@"

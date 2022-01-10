@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -z "$BIRT" ]; then
+	echo "Please define BIRT"
+	exit 1
+fi
+cd "$BIRT"
+git checkout -- '*'
+git clean -dfq

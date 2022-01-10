@@ -2,26 +2,38 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 FILETYPE="$1"
-shift 1
-DIR="$1"
+DIR="$2"
 if [ -z "$DIR" ]; then
+	if [ -z "$BIRT" ]; then
+		echo "Please define BIRT"
+		exit 1
+	fi
 	DIR="$BIRT"
 fi
-echo "searching in $DIR"
-shift 1
-TEST="$1"
-FILES=$(find "$DIR" -name "*.$FILETYPE")
-SEARCH="Copyright (c)"
-for FILE in $FILES; do
-	if [ -z "$TEST" ]; then
-		BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
-		mv "$FILE" "$BACKUP_FILE"
-		awk -v filetype=$FILETYPE\
-		 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"\
-		 && rm "$BACKUP_FILE"
-	else
-		echo " file - $FILE"
-		awk -v filetype=$FILETYPE\
-		 -f copyright.awk epl2/license-comment.txt "$FILE"
+TEST="$3"
+readarray -d '' FILES < <(find "$DIR" -name "*.$FILETYPE" -type f -print0)
+for FILE in "${FILES[@]}"; do
+	if [ -f "$FILE" ]; then
+		if [ -z "$TEST" ]; then
+			BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+			mv "$FILE" "$BACKUP_FILE"
+			if awk -v filetype=$FILETYPE\
+				 -v noDefault=0\
+				 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
+				rm "$BACKUP_FILE"
+			else
+				if (($? == 2)); then
+					if awk -v filetype=$FILETYPE\
+						 -v noDefault=1\
+						 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
+						rm "$BACKUP_FILE"
+					fi
+				fi
+			fi
+		else
+			echo " file - $FILE"
+			awk -v filetype=$FILETYPE\
+			 -f copyright.awk epl2/license-comment.txt "$FILE"
+		fi
 	fi
 done

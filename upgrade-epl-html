@@ -3,17 +3,18 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 DIR="$1"
 if [ -z "$DIR" ]; then
+  if [ -z "$BIRT" ]; then
+    echo "Please define BIRT"
+    exit 1
+  fi
   DIR="$BIRT"
 fi
-echo "searching in $DIR"
-shift 1
-TEST="$1"
+TEST="$2"
 FILES=$(find "$DIR" -name "epl-v10.html")
 for FILE in $FILES; do
   if [ -z "$TEST" ]; then
-    BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
-    mv "$FILE" "$BACKUP_FILE"
     cp epl2/epl-2.0.html $(dirname $FILE)
+    rm "$FILE"
   else
     echo "$FILE"
   fi

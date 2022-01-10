@@ -35,9 +35,11 @@ BEGIN {
 }
 END {
 	if(c==1) {
-		print "** Copyright line not found **";
+		print "** Copyright line not found **" > "/dev/stderr";
+		exit 1;
 	}
 	else if(c==2) {
-		print "** Contributors line not found **";
+		print "** Contributors line not found **" > "/dev/stderr";
+		exit 1;
 	}
 }

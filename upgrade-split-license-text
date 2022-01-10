@@ -1,0 +1,42 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+DIR="$1"
+if [ -z "$DIR" ]; then
+  if [ -z "$BIRT" ]; then
+    echo "Please define BIRT"
+    exit 1
+  fi
+  DIR="$BIRT"
+fi
+TEST="$2"
+SEARCH='Eclipse Public\\n\\'
+COMMAND='/Eclipse Public\\n\\/{
+  N
+  s/Eclipse Public\(.*\)License Version 1.0/Eclipse Public\1License Version 2.0/
+}'
+readarray -d '' FILES < <(find "$DIR"\
+ -not -name "*.jar"\
+ -not -name "*.rptdocument"\
+ -not -name "*.class"\
+ -not -name "about.html"\
+ -not -name "*.png"\
+ -not -name "*.zip"\
+ -not -name "*.min.js"\
+ -not -name "*.svg"\
+ -type f -print0)
+echo "file count = ${#FILES[*]}"
+for FILE in "${FILES[@]}"; do
+  if FOUND=$(grep "$SEARCH" "$FILE"); then
+    if [ -z "$TEST" ]; then
+      BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+      mv "$FILE" "$BACKUP_FILE"
+      sed "$COMMAND" "$BACKUP_FILE" > "$FILE"
+      rm "$BACKUP_FILE"
+    else
+      echo ""
+      echo "file - $FILE"
+      sed "$COMMAND" "$FILE"
+    fi
+  fi
+done

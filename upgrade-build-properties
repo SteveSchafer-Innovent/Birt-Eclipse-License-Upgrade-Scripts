@@ -10,13 +10,15 @@ if [ -z "$DIR" ]; then
   DIR="$BIRT"
 fi
 TEST="$2"
-FILES=$(find "$DIR" -name "license.html")
+FILES=$(find "$DIR" -name "build.properties")
 for FILE in $FILES; do
   if [ -z "$TEST" ]; then
     BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
     mv "$FILE" "$BACKUP_FILE"
-    cp epl2/license.html "$FILE"
+    sed 's/epl-v10.html/epl-2.0.html/g' "$BACKUP_FILE" > "$FILE"
+    rm "$BACKUP_FILE"
   else
-    echo "$FILE"
+    echo "file - $FILE"
+    sed 's/epl-v10.html/epl-2.0.html/g' "$FILE"
   fi
 done

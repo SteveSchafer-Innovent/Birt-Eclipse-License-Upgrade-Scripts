@@ -3,12 +3,14 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 DIR="$1"
 if [ -z "$DIR" ]; then
+	if [ -z "$BIRT" ]; then
+		echo "Please define BIRT"
+		exit 1
+	fi
 	DIR="$BIRT"
 fi
-echo "searching in $DIR"
-shift 1
-TEST="$1"
-FILES=$(find "$DIR" -name package.html)
+TEST="$2"
+FILES=$(find "$DIR" -name "package.html")
 SEARCH="Eclipse(\n| )+Public(\n| )+License(\n| )+(Version(\n| )|v)+1.0"
 FILES=$(for FILE in $FILES; do pcregrep -l -M "$SEARCH" "$FILE"; done)
 for FILE in $FILES; do

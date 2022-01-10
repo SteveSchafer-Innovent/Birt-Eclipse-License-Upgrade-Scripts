@@ -1,0 +1,39 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+DIR="$1"
+if [ -z "$DIR" ]; then
+  if [ -z "$BIRT" ]; then
+    echo "Please define BIRT"
+    exit 1
+  fi
+  DIR="$BIRT"
+fi
+TEST="$2"
+SEARCH="http:\\/\\/www\\.eclipse\\.org\\/legal\\/epl-v10\\.html"
+REPLACE="https:\\/\\/www.eclipse.org\\/legal\\/epl-2.0\\/"
+readarray -d '' FILES < <(find "$DIR"\
+ -not -name "*.jar"\
+ -not -name "*.rptdocument"\
+ -not -name "*.class"\
+ -not -name "about.html"\
+ -not -name "*.png"\
+ -not -name "*.zip"\
+ -not -name "*.min.js"\
+ -not -name "*.svg"\
+ -type f\
+ -print0)
+for FILE in "${FILES[@]}"; do
+  # echo "file = $FILE"
+  if grep -q "$SEARCH" "$FILE"; then
+    if [ -z "$TEST" ]; then
+      BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+      mv "$FILE" "$BACKUP_FILE"
+      sed "s/$SEARCH/$REPLACE/g" "$BACKUP_FILE" > "$FILE"
+      rm "$BACKUP_FILE"
+    else
+      echo "file - $FILE"
+      sed "s/$SEARCH/$REPLACE/g" "$FILE"
+    fi
+  fi
+done

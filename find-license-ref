@@ -2,10 +2,14 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 DIR="$1"
 if [ -z "$DIR" ]; then
+	if [ -z "$BIRT" ]; then
+		echo "Please define BIRT"
+		exit 1
+	fi
 	DIR="$BIRT"
 fi
-echo "searching in $DIR"
-FILES=$(find "$DIR"\
+SEARCH="epl-v10.html"
+readarray -d '' FILES < <(find "$DIR"\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\
@@ -14,9 +18,9 @@ FILES=$(find "$DIR"\
  -not -name "*.zip"\
  -not -name "*.min.js"\
  -not -name "*.svg"\
- -type f)
-SEARCH="Eclipse(\n| )+Public(\n| )+License(\n| )+(Version(\n| )|v)+1.0"
-for FILE in $FILES; do
+ -type f\
+ -print0)
+for FILE in "${FILES[@]}"; do
 	# echo "file = $FILE"
-	pcregrep -l -M "$SEARCH" "$FILE" 2> find-licenses.err.log
+	grep -l "$SEARCH" "$FILE" 2> find-licenses.err.log
 done

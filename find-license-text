@@ -8,7 +8,9 @@ if [ -z "$DIR" ]; then
     fi
 	DIR="$BIRT"
 fi
-FILES=$(find "$DIR"\
+SEARCH='Eclipse Public License \(Version \|v *\)1\.0'
+echo "SEARCH = $SEARCH"
+readarray -d '' FILES < <(find "$DIR"\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\
@@ -17,14 +19,10 @@ FILES=$(find "$DIR"\
  -not -name "*.zip"\
  -not -name "*.min.js"\
  -not -name "*.svg"\
- -type f)
-SEARCH="Copyright (c)"
-echo "search for $SEARCH"
-echo "$FILES" | wc -l
-for FILE in $FILES; do
-	if [ -f "$FILE" ]; then
-		grep -l "$SEARCH" "$FILE" 2> find-copyrights.err.log
-	else
-		echo "not found: $FILE" > find-copyrights.err.log
-	fi
+ -type f -print0)
+echo "file count = ${#FILES[*]}"
+for FILE in "${FILES[@]}"; do
+    if RESULT=$(grep "$SEARCH" "$FILE"); then
+        echo "file = $FILE"
+    fi
 done

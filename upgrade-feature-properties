@@ -3,11 +3,13 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 DIR="$1"
 if [ -z "$DIR" ]; then
+	if [ -z "$BIRT" ]; then
+		echo "Please define BIRT"
+		exit 1
+	fi
 	DIR="$BIRT"
 fi
-echo "searching in $DIR"
-shift 1
-TEST="$1"
+TEST="$2"
 FILES=$(find "$DIR" -name "*.properties")
 FILES=$(for FILE in $FILES; do grep -l "license=" $FILE; done)
 for FILE in $FILES; do
