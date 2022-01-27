@@ -9,50 +9,77 @@ BEGIN {
     contributorsFound=0;
     startLineNumber=1;
     defaultCopyrightInserted=0;
+    altCount = 1;
+    altFound = 0;
     if(filetype=="java") {
-        firstLineRegex="^/\\*\\*\\*+";
-        copyrightLineRegex="^ *\\* Copyright \\([cC]\\) *[0-9]+";
-        contributorsLineRegex="^ \\* Contributors:";
-        licenseRegex="^ \\* All rights reserved";
-        subsequentLineRegex="^ \\* ";
-        lastLineRegex="^ *\\*\\*\\*+";
-        firstLine="/*******************************************************************************";
-        lastLine=" *******************************************************************************/";
-        prefix=" * ";
+        altCount = 2;
+        altFound = 0;
+        firstLineRegex[altFound]="^/\\*\\*\\*+";
+        copyrightLineRegex[altFound]="^ *\\* Copyright \\([cC]\\) *[0-9]+";
+        contributorsLineRegex[altFound]="^ \\* Contributors:";
+        licenseRegex[altFound]="^ \\* All rights reserved";
+        subsequentLineRegex[altFound]="^ \\* ";
+        lastLineRegex[altFound]="^ *\\*\\*\\*+";
+        firstLine[altFound]="/*******************************************************************************";
+        lastLine[altFound]=" *******************************************************************************/";
+        prefix[altFound]=" * ";
+        altFound = 1;
+        firstLineRegex[altFound]="^///\\*\\*\\*+";
+        copyrightLineRegex[altFound]="^// *\\* Copyright \\([cC]\\) *[0-9]+";
+        contributorsLineRegex[altFound]="^// \\* Contributors:";
+        licenseRegex[altFound]="^// \\* All rights reserved";
+        subsequentLineRegex[altFound]="^// \\* ";
+        lastLineRegex[altFound]="^// *\\*\\*\\*+";
+        firstLine[altFound]="///*******************************************************************************";
+        lastLine[altFound]="// *******************************************************************************/";
+        prefix[altFound]="// * ";
     }
     else if(filetype=="properties") {
-        firstLineRegex="^#/\\*\\*\\*+";
-        copyrightLineRegex="^# \\* Copyright \\([cC]\\) [0-9]+";
-        contributorsLineRegex="^# \\* Contributors:";
-        licenseRegex="^# \\* All rights reserved";
-        subsequentLineRegex="^# \\* ";
-        lastLineRegex="^# *\\*\\*\\*+";
-        firstLine="#/*******************************************************************************";
-        lastLine="# *******************************************************************************/";
-        prefix="# * ";
+        altCount = 2;
+        altFound = 0;
+        firstLineRegex[altFound]="^#/\\*\\*\\*+";
+        copyrightLineRegex[altFound]="^# \\* Copyright \\([cC]\\) [0-9]+";
+        contributorsLineRegex[altFound]="^# \\* Contributors:";
+        licenseRegex[altFound]="^# \\* All rights reserved";
+        subsequentLineRegex[altFound]="^# \\* ";
+        lastLineRegex[altFound]="^# *\\*\\*\\*+";
+        firstLine[altFound]="#/*******************************************************************************";
+        lastLine[altFound]="# *******************************************************************************/";
+        prefix[altFound]="# * ";
+        altFound = 1;
+        firstLineRegex[altFound]="^##+";
+        copyrightLineRegex[altFound]="^# Copyright \\([cC]\\) [0-9]+";
+        contributorsLineRegex[altFound]="^# Contributors:";
+        licenseRegex[altFound]="^# All rights reserved";
+        subsequentLineRegex[altFound]="^# ";
+        lastLineRegex[altFound]="^##+";
+        firstLine[altFound]="###############################################################################";
+        lastLine[altFound]="###############################################################################";
+        prefix[altFound]="# ";
     }
     else if(filetype=="xml") {
-        firstLineRegex="^<!--";
-        copyrightLineRegex="^ \\* Copyright \\([cC]\\) [0-9]+";
-        contributorsLineRegex="^ \\* Contributors:";
-        licenseRegex="^ \\* All rights reserved";
-        subsequentLineRegex="^ \\* ";
-        lastLineRegex="^ *\\*\\*\\*+";
-        firstLine="<!--\n *******************************************************************************";
-        lastLine=" *******************************************************************************\n-->";
-        prefix=" * ";
+        firstLineRegex[altFound]="^<!--";
+        copyrightLineRegex[altFound]="^ \\* Copyright \\([cC]\\) [0-9]+";
+        contributorsLineRegex[altFound]="^ \\* Contributors:";
+        licenseRegex[altFound]="^ \\* All rights reserved";
+        subsequentLineRegex[altFound]="^ \\* ";
+        lastLineRegex[altFound]="^ *\\*\\*\\*+";
+        firstLine[altFound]="<!--\n *******************************************************************************";
+        lastLine[altFound]=" *******************************************************************************\n-->";
+        prefix[altFound]=" * ";
     }
     else if(filetype=="msg") {
-        firstLineRegex="^#+";
-        copyrightLineRegex="^# Copyright \\([cC]\\) [0-9]+";
-        contributorsLineRegex="^# Contributors:";
-        licenseRegex="^# All rights reserved";
-        subsequentLineRegex="^# ";
-        lastLineRegex="^#+";
-        firstLine="###############################################################################";
-        lastLine="###############################################################################";
-        prefix="# ";
+        firstLineRegex[altFound]="^#+";
+        copyrightLineRegex[altFound]="^# Copyright \\([cC]\\) [0-9]+";
+        contributorsLineRegex[altFound]="^# Contributors:";
+        licenseRegex[altFound]="^# All rights reserved";
+        subsequentLineRegex[altFound]="^# ";
+        lastLineRegex[altFound]="^#+";
+        firstLine[altFound]="###############################################################################";
+        lastLine[altFound]="###############################################################################";
+        prefix[altFound]="# ";
     }
+    altFound = 0;
 }
 NR==FNR {
     # print "** adding line **";
@@ -79,46 +106,52 @@ filetype=="java" && FNR==2 &&
     # insert new license
     for(i=0; i<newLineCount; i++) {
         line=lines[i];
-        print prefix line;
+        print prefix[0] line;
     }
-    licenseFound=1;
-    copyrightFound=1;
-    commentLineCount=commentLineCount+1;
+    licenseFound = 1;
+    copyrightFound = 1;
+    commentLineCount = commentLineCount + 1;
     next;
 }
-$0 ~ firstLineRegex && FNR==startLineNumber {
-    if(filetype == "xml" && $0 ~ /^<!--.*-->/) {
-        # single line comment terminates xml search
-    }
-    else {
-        # first line of copyright comment
-        print "** found first line **" > "/dev/stderr";
-        print $0;
-        commentLineCount=1;
-        next;
+FNR == startLineNumber {
+    altFound = 0;
+    for(i = 0; i < altCount; i++) {
+        if($0 ~ firstLineRegex[i]) {
+            altFound = i;
+            if(filetype == "xml" && $0 ~ /^<!--.*-->/) {
+                # single line comment terminates xml search
+            }
+            else {
+                # first line of copyright comment
+                print "** found first line alt " i " **" > "/dev/stderr";
+                print $0;
+                commentLineCount = 1;
+                next;
+            }
+        }
     }
 }
-FNR==startLineNumber && noDefault==0 {
+FNR == startLineNumber && noDefault == 0 {
     # comment not found
     # insert new comment
     print "** comment not found. inserting new comment **" > "/dev/stderr";
-    print firstLine;
-    print prefix "Copyright (c) 2021 Contributors to the Eclipse Foundation"
-    print prefix ""
+    print firstLine[altFound];
+    print prefix[altFound] "Copyright (c) 2021 Contributors to the Eclipse Foundation"
+    print prefix[altFound] ""
     for(i=0; i<newLineCount; i++) {
         line=lines[i];
-        print prefix line;
+        print prefix[altFound] line;
     }
-    print prefix "Contributors:"
-    print prefix "  See git history"
-    print lastLine;
+    print prefix[altFound] "Contributors:"
+    print prefix[altFound] "  See git history"
+    print lastLine[altFound];
     print $0;
     commentLineCount=0;
     copyrightFound=1;
     defaultCopyrightInserted=1;
     next;
 }
-$0 ~ copyrightLineRegex {
+$0 ~ copyrightLineRegex[altFound] {
     if(defaultCopyrightInserted==1) {
         print "** ERROR: duplicate copyright **" > "/dev/stderr";
         exit 2;
@@ -129,7 +162,7 @@ $0 ~ copyrightLineRegex {
     commentLineCount=commentLineCount+1;
     next;
 }
-$0 ~ contributorsLineRegex {
+$0 ~ contributorsLineRegex[altFound] {
     # contributors line found
     print "** found contributors line **" > "/dev/stderr";
     print $0;
@@ -137,21 +170,21 @@ $0 ~ contributorsLineRegex {
     commentLineCount=commentLineCount+1;
     next;
 }
-$0 ~ licenseRegex {
+$0 ~ licenseRegex[altFound] {
     # license found
     # insert new license
     print "** found license line **" > "/dev/stderr";
-    print prefix "";
+    print prefix[altFound] "";
     for(i=0; i<newLineCount; i++) {
         line=lines[i];
-        print prefix line;
+        print prefix[altFound] line;
     }
     licenseFound=1;
     copyrightFound=1;
     commentLineCount=commentLineCount+1;
     next;
 }
-$0 ~ subsequentLineRegex && commentLineCount>0 {
+$0 ~ subsequentLineRegex[altFound] && commentLineCount>0 {
     # subsequent line of copyright comment
     # print "** found subsequent line **";
     print "** found subsequent line **" > "/dev/stderr";
@@ -161,7 +194,7 @@ $0 ~ subsequentLineRegex && commentLineCount>0 {
     commentLineCount=commentLineCount+1;
     next;
 }
-$0 ~ lastLineRegex && commentLineCount>0 {
+$0 ~ lastLineRegex[altFound] && commentLineCount>0 {
     # last line of copyright comment
     # print "** found last line **";
     print "** found last line **" > "/dev/stderr";

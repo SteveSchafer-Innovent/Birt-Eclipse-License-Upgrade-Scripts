@@ -18,6 +18,7 @@ COMMAND='/Eclipse *$/{
   s/Eclipse\(.*\)Public License v1\.0/Eclipse\1Public License v2.0/
 }'
 readarray -d '' FILES < <(find "$DIR"\
+ -not -path '*/.*'\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\

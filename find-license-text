@@ -11,6 +11,7 @@ fi
 SEARCH='Eclipse Public License \(Version \|v *\)1\.0'
 echo "SEARCH = $SEARCH"
 readarray -d '' FILES < <(find "$DIR"\
+ -not -path '*/.*'\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\

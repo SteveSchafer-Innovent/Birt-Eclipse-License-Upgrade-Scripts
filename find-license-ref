@@ -10,6 +10,7 @@ if [ -z "$DIR" ]; then
 fi
 SEARCH="epl-v10.html"
 readarray -d '' FILES < <(find "$DIR"\
+ -not -path '*/.*'\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\

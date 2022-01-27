@@ -10,9 +10,11 @@ if [ -z "$DIR" ]; then
   DIR="$BIRT"
 fi
 TEST="$2"
-SEARCH='Eclipse Public License \(Version \|v *\)1\.0'
-COMMAND='s/Eclipse Public License \(Version \|v *\)1\.0/Eclipse Public License \12.0/'
+# Eclipse Public License - v 1.0
+SEARCH='Eclipse Public License \(Version \|v *\|- v *\)1\.0'
+COMMAND='s/Eclipse Public License \(Version \|v *\|- v *\)1\.0/Eclipse Public License \12.0/g'
 readarray -d '' FILES < <(find "$DIR"\
+ -not -path '*/.*'\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\

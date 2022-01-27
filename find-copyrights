@@ -9,6 +9,7 @@ if [ -z "$DIR" ]; then
 	DIR="$BIRT"
 fi
 FILES=$(find "$DIR"\
+ -not -path '*/.*'\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\

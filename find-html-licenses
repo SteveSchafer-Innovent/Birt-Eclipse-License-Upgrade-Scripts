@@ -10,6 +10,7 @@ if [ -z "$DIR" ]; then
 fi
 FILES=$(find "$DIR"\
  -name "*.html"\
+ -not -path '*/.*'\
  -not -name "license.html"\
  -not -name "about.html"\
  -type f)

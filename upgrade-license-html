@@ -13,8 +13,6 @@ TEST="$2"
 FILES=$(find "$DIR" -name "license.html")
 for FILE in $FILES; do
   if [ -z "$TEST" ]; then
-    BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
-    mv "$FILE" "$BACKUP_FILE"
     cp epl2/license.html "$FILE"
   else
     echo "$FILE"
