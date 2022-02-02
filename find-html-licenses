@@ -4,14 +4,21 @@ DIR="$1"
 if [ -z "$DIR" ]; then
     DIR="$(./default-birt-directory)"
 fi
-FILES=$(find "$DIR"\
+readarray -d '' FILES < <(find "$DIR"\
  -name "*.html"\
  -not -path '*/.*'\
  -not -name "license.html"\
  -not -name "about.html"\
- -type f)
+ -not -path '*/.*'\
+ -type f -print0)
 SEARCH="Eclipse(\n| )+Public(\n| )+License(\n| )+(Version(\n| )|v)+1.0"
-for FILE in $FILES; do
-	# echo "file = $FILE"
-	pcregrep -l -M "$SEARCH" "$FILE" 2> find-licenses.err.log
+echo "search for $SEARCH" > find-html-licenses.err.log
+echo "file count = ${#FILES[*]}" > find-html-licenses.err.log
+for FILE in "${FILES[@]}"; do
+    if [ -f "$FILE" ]; then
+        # echo "file = $FILE"
+        pcregrep -l -M "$SEARCH" "$FILE" 2> find-html-licenses.err.log
+    else
+        echo "not found: $FILE"
+    fi
 done

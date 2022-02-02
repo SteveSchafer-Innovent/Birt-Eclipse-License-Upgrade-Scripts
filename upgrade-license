@@ -23,6 +23,7 @@ cp ./changed-files/ViewservletRepoGen.java $DIR/build/org.eclipse.birt.build/src
 ./upgrade-epl-urls "$@"
 ./upgrade-license-text "$@"
 ./upgrade-split-license-text "$@"
+./upgrade-split2-license-text "$@"
 if [ -z "$TEST" ]; then
 	rm $DIR/features/org.eclipse.birt.rcp.feature/feature.properties_backup_*
 	rm $DIR/model/org.eclipse.birt.report.model.tests/test/org/eclipse/birt/report/model/parser/input/EmptyDesignFile.xml_backup_*

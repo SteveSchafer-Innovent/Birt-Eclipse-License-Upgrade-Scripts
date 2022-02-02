@@ -14,15 +14,9 @@ COMMAND='/Eclipse *$/{
   s/Eclipse\(.*\)Public License v1\.0/Eclipse\1Public License v2.0/
 }'
 readarray -d '' FILES < <(find "$DIR"\
+  -name '*.html'\
  -not -path '*/.*'\
- -not -name "*.jar"\
- -not -name "*.rptdocument"\
- -not -name "*.class"\
  -not -name "about.html"\
- -not -name "*.png"\
- -not -name "*.zip"\
- -not -name "*.min.js"\
- -not -name "*.svg"\
  -type f -print0)
 for FILE in "${FILES[@]}"; do
   cp "$FILE" "$TMP_FILE"
