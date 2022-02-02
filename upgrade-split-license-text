@@ -3,11 +3,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 DIR="$1"
 if [ -z "$DIR" ]; then
-  if [ -z "$BIRT" ]; then
-    echo "Please define BIRT"
-    exit 1
-  fi
-  DIR="$BIRT"
+  DIR="$(./default-birt-directory)"
 fi
 TEST="$2"
 SEARCH='Eclipse Public\\n\\'
@@ -26,7 +22,6 @@ readarray -d '' FILES < <(find "$DIR"\
  -not -name "*.min.js"\
  -not -name "*.svg"\
  -type f -print0)
-echo "file count = ${#FILES[*]}"
 for FILE in "${FILES[@]}"; do
   if FOUND=$(grep "$SEARCH" "$FILE"); then
     if [ -z "$TEST" ]; then

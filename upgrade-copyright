@@ -4,11 +4,7 @@ TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 FILETYPE="$1"
 DIR="$2"
 if [ -z "$DIR" ]; then
-	if [ -z "$BIRT" ]; then
-		echo "Please define BIRT"
-		exit 1
-	fi
-	DIR="$BIRT"
+	DIR="$(./default-birt-directory)"
 fi
 TEST="$3"
 readarray -d '' FILES < <(find "$DIR" -name "*.$FILETYPE" -type f -print0)
@@ -19,14 +15,26 @@ for FILE in "${FILES[@]}"; do
 			mv "$FILE" "$BACKUP_FILE"
 			if awk -v filetype=$FILETYPE\
 				 -v noDefault=0\
+				 -v addDefault=0\
 				 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
 				rm "$BACKUP_FILE"
 			else
-				if (($? == 2)); then
+				ERROR="$?"
+				if (($ERROR == 2)); then
 					if awk -v filetype=$FILETYPE\
 						 -v noDefault=1\
+						 -v addDefault=0\
 						 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
 						rm "$BACKUP_FILE"
+					fi
+				else
+					if (($ERROR == 3)); then
+						if awk -v filetype=$FILETYPE\
+							 -v noDefault=1\
+							 -v addDefault=1\
+							 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
+							rm "$BACKUP_FILE"
+						fi
 					fi
 				fi
 			fi

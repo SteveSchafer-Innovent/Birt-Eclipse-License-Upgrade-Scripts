@@ -5,11 +5,7 @@ TMP_FILE="/tmp/temp_$TIMESTAMP"
 NEW_FILE="/tmp/new_$TIMESTAMP"
 DIR="$1"
 if [ -z "$DIR" ]; then
-  if [ -z "$BIRT" ]; then
-    echo "Please define BIRT"
-    exit 1
-  fi
-  DIR="$BIRT"
+  DIR="$(./default-birt-directory)"
 fi
 TEST="$2"
 SEARCH='Eclipse *\n[ \*]*Public License'
@@ -28,7 +24,6 @@ readarray -d '' FILES < <(find "$DIR"\
  -not -name "*.min.js"\
  -not -name "*.svg"\
  -type f -print0)
-echo "file count = ${#FILES[*]}"
 for FILE in "${FILES[@]}"; do
   cp "$FILE" "$TMP_FILE"
   dos2unix -q "$TMP_FILE"

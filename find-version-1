@@ -2,11 +2,7 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 DIR="$1"
 if [ -z "$DIR" ]; then
-    if [ -z "$BIRT" ]; then
-        echo "Please define BIRT"
-        exit 1
-    fi
-	DIR="$BIRT"
+    DIR="$(./default-birt-directory)"
 fi
 SEARCH="Eclipse Public\\\\n\\\\\\nLicense +(Version +|v)1\\.0"
 readarray -d '' FILES < <(find "$DIR"\

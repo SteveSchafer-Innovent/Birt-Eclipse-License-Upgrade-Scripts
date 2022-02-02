@@ -1,6 +1,8 @@
 BEGIN {
+    print "** new file **" > "/dev/stderr";
     print "** filetype " filetype " **" > "/dev/stderr";
     print "** noDefault " noDefault " **" > "/dev/stderr";
+    print "** addDefault " addDefault " **" > "/dev/stderr";
     commentLineCount=0; # Existing copyright comment
     newLineCount=0; # New copyright comment
     copyrightFound=0;
@@ -12,7 +14,7 @@ BEGIN {
     altCount = 1;
     altFound = 0;
     if(filetype=="java") {
-        altCount = 2;
+        altCount = 3;
         altFound = 0;
         firstLineRegex[altFound]="^/\\*\\*\\*+";
         copyrightLineRegex[altFound]="^ *\\* Copyright \\([cC]\\) *[0-9]+";
@@ -33,9 +35,19 @@ BEGIN {
         firstLine[altFound]="///*******************************************************************************";
         lastLine[altFound]="// *******************************************************************************/";
         prefix[altFound]="// * ";
+        altFound = 2;
+        firstLineRegex[altFound]="^/\\* +Copyright \\([cC]\\) *[0-9]+";
+        copyrightLineRegex[altFound]="";
+        contributorsLineRegex[altFound]="^ \\* Contributors:";
+        licenseRegex[altFound]="^ \\* All rights reserved";
+        subsequentLineRegex[altFound]="^ \\* ";
+        lastLineRegex[altFound]="^ *\\*\\*\\*+";
+        firstLine[altFound]="/*******************************************************************************";
+        lastLine[altFound]=" *******************************************************************************/";
+        prefix[altFound]=" * ";
     }
     else if(filetype=="properties") {
-        altCount = 2;
+        altCount = 3;
         altFound = 0;
         firstLineRegex[altFound]="^#/\\*\\*\\*+";
         copyrightLineRegex[altFound]="^# \\* Copyright \\([cC]\\) [0-9]+";
@@ -56,6 +68,16 @@ BEGIN {
         firstLine[altFound]="###############################################################################";
         lastLine[altFound]="###############################################################################";
         prefix[altFound]="# ";
+        altFound = 2;
+        firstLineRegex[altFound]="^#\\**";
+        copyrightLineRegex[altFound]="^# Copyright \\([cC]\\) [0-9]+";
+        contributorsLineRegex[altFound]="^# Contributors:";
+        licenseRegex[altFound]="^# All rights reserved";
+        subsequentLineRegex[altFound]="^#";
+        lastLineRegex[altFound]="^#\\*\\*\\*+";
+        firstLine[altFound]="#/*******************************************************************************";
+        lastLine[altFound]="# *******************************************************************************/";
+        prefix[altFound]="# * ";
     }
     else if(filetype=="xml") {
         firstLineRegex[altFound]="^<!--";
@@ -113,6 +135,25 @@ filetype=="java" && FNR==2 &&
     commentLineCount = commentLineCount + 1;
     next;
 }
+FNR == startLineNumber && addDefault == 1 {
+    # insert new comment
+    print "** inserting new comment **" > "/dev/stderr";
+    print firstLine[altFound];
+    print prefix[altFound] "Copyright (c) 2021 Contributors to the Eclipse Foundation"
+    print prefix[altFound] ""
+    for(i=0; i<newLineCount; i++) {
+        line=lines[i];
+        print prefix[altFound] line;
+    }
+    print prefix[altFound] "Contributors:"
+    print prefix[altFound] "  See git history"
+    print lastLine[altFound];
+    print $0;
+    commentLineCount=0;
+    copyrightFound=1;
+    defaultCopyrightInserted=1;
+    next;
+}
 FNR == startLineNumber {
     altFound = 0;
     for(i = 0; i < altCount; i++) {
@@ -126,6 +167,9 @@ FNR == startLineNumber {
                 print "** found first line alt " i " **" > "/dev/stderr";
                 print $0;
                 commentLineCount = 1;
+                if(copyrightLineRegex[altFound] == "") {
+                    copyrightFound = 1;
+                }
                 next;
             }
         }
@@ -151,9 +195,9 @@ FNR == startLineNumber && noDefault == 0 {
     defaultCopyrightInserted=1;
     next;
 }
-$0 ~ copyrightLineRegex[altFound] {
+copyrightLineRegex[altFound] != "" && $0 ~ copyrightLineRegex[altFound] {
     if(defaultCopyrightInserted==1) {
-        print "** ERROR: duplicate copyright **" > "/dev/stderr";
+        print "** duplicate copyright. will run again without default **" > "/dev/stderr";
         exit 2;
     }
     print "** found copyright ** " > "/dev/stderr";
@@ -220,7 +264,7 @@ END {
         exit 1;
     }
     if(copyrightFound==0) {
-        print "** ERROR: copyright not found **" > "/dev/stderr";
-        exit 1;
+        print "** copyright not found. will run again and force default copyright **" > "/dev/stderr";
+        exit 3;
     }
 }

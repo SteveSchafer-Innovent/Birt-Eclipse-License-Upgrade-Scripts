@@ -3,11 +3,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 DIR="$1"
 if [ -z "$DIR" ]; then
-  if [ -z "$BIRT" ]; then
-    echo "Please define BIRT"
-    exit 1
-  fi
-  DIR="$BIRT"
+  DIR="$(./default-birt-directory)"
 fi
 TEST="$2"
 FILES=$(find "$DIR" -name "epl-v10.html")

@@ -4,8 +4,9 @@ DIR="$1"
 if [ -z "$DIR" ]; then
 	DIR="$(./default-birt-directory)"
 fi
-FILES=$(find "$DIR"\
+readarray -d '' FILES < <(find "$DIR"\
  -not -path '*/.*'\
+ -not -name '*.xml'\
  -not -name "*.jar"\
  -not -name "*.rptdocument"\
  -not -name "*.class"\
@@ -14,14 +15,18 @@ FILES=$(find "$DIR"\
  -not -name "*.zip"\
  -not -name "*.min.js"\
  -not -name "*.svg"\
- -type f)
+ -type f -print0)
 SEARCH="Copyright (c)"
 echo "search for $SEARCH"
-echo "$FILES" | wc -l
-for FILE in $FILES; do
+echo "file count = ${#FILES[*]}"
+for FILE in "${FILES[@]}"; do
 	if [ -f "$FILE" ]; then
-		grep -l "$SEARCH" "$FILE" 2> find-copyrights.err.log
+		if COUNT=$(grep -ci "$SEARCH" "$FILE" 2> find-copyrights.err.log); then
+            if (( "$COUNT" > 1 )); then
+                echo "$FILE"
+            fi
+        fi
 	else
-		echo "not found: $FILE" > find-copyrights.err.log
+		echo "not found: $FILE"
 	fi
 done

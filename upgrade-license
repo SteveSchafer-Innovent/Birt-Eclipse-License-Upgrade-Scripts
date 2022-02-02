@@ -1,5 +1,16 @@
 #!/bin/sh
 cd "$(dirname "${BASH_SOURCE[0]}")"
+DIR="$1"
+if [ -z "$DIR" ]; then
+  DIR="$(./default-birt-directory)"
+fi
+TEST="$2"
+for FILE in $(find $DIR -name "*_backup_*"); do rm $FILE; done
+cp ./epl2/license.txt $DIR/LICENSE
+cp ./changed-files/RepoGen.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+cp ./changed-files/FileInfo.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+cp ./changed-files/ExternalDependency.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+cp ./changed-files/ViewservletRepoGen.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
 ./upgrade-license-html "$@"
 ./upgrade-epl-html "$@"
 ./upgrade-feature-properties "$@"
@@ -12,3 +23,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 ./upgrade-epl-urls "$@"
 ./upgrade-license-text "$@"
 ./upgrade-split-license-text "$@"
+if [ -z "$TEST" ]; then
+	rm $DIR/features/org.eclipse.birt.rcp.feature/feature.properties_backup_*
+	rm $DIR/model/org.eclipse.birt.report.model.tests/test/org/eclipse/birt/report/model/parser/input/EmptyDesignFile.xml_backup_*
+	rm $DIR/model/org.eclipse.birt.report.model.tests/test/org/eclipse/birt/report/model/writer/input/DocumentUtilTest_parser.xml_backup_*
+fi
