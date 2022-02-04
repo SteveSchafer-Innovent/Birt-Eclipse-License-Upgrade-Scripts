@@ -9,45 +9,50 @@ fi
 TEST="$3"
 readarray -d '' FILES < <(find "$DIR" -name "*.$FILETYPE" -type f -print0)
 for FILE in "${FILES[@]}"; do
-	if [ -f "$FILE" ]; then
-		if [ -z "$TEST" ]; then
-			BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
-			mv "$FILE" "$BACKUP_FILE"
+	if [ ! -f "$FILE" ]; then
+		continue
+	fi
+	if [ ! -z "$TEST" ]; then
+		echo " file - $FILE"
+		awk -v filetype=$FILETYPE\
+		 -f copyright.awk epl2/license-comment.txt "$FILE"
+		continue
+	fi
+	BASENAME=$(basename "$FILE")
+	if [ "$BASENAME" == "SessionHandleTest_INVALIDBOM.xml" ]; then
+		continue
+	fi
+	BACKUP_FILE="${FILE}_backup_$TIMESTAMP"
+	mv "$FILE" "$BACKUP_FILE"
+	if awk -v filetype=$FILETYPE\
+		 -v noDefault=0\
+		 -v addDefault=0\
+		 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
+		rm "$BACKUP_FILE"
+	else
+		ERROR="$?"
+		if (($ERROR == 2)); then
 			if awk -v filetype=$FILETYPE\
-				 -v noDefault=0\
+				 -v noDefault=1\
 				 -v addDefault=0\
 				 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
 				rm "$BACKUP_FILE"
-			else
-				ERROR="$?"
-				if (($ERROR == 2)); then
-					if awk -v filetype=$FILETYPE\
-						 -v noDefault=1\
-						 -v addDefault=0\
-						 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
-						rm "$BACKUP_FILE"
-					fi
-				else
-					if (($ERROR == 3)); then
-						if awk -v filetype=$FILETYPE\
-							 -v noDefault=1\
-							 -v addDefault=1\
-							 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
-							rm "$BACKUP_FILE"
-						fi
-					else
-						if (($ERROR == 4)); then
-							# don't change this file
-							echo "restoring backup file" >> "/dev/stderr"
-							mv "$BACKUP_FILE" "$FILE"
-						fi
-					fi
-				fi
 			fi
 		else
-			echo " file - $FILE"
-			awk -v filetype=$FILETYPE\
-			 -f copyright.awk epl2/license-comment.txt "$FILE"
+			if (($ERROR == 3)); then
+				if awk -v filetype=$FILETYPE\
+					 -v noDefault=1\
+					 -v addDefault=1\
+					 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
+					rm "$BACKUP_FILE"
+				fi
+			else
+				if (($ERROR == 4)); then
+					# don't change this file
+					echo "restoring backup file" >> "/dev/stderr"
+					mv "$BACKUP_FILE" "$FILE"
+				fi
+			fi
 		fi
 	fi
 done
