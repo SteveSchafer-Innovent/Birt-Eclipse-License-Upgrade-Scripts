@@ -13,6 +13,7 @@ BEGIN {
     defaultCopyrightInserted=0;
     altCount = 1;
     altFound = 0;
+    reportFound = 0;
     if(filetype=="java") {
         altCount = 3;
         altFound = 0;
@@ -111,12 +112,38 @@ NR==FNR {
 FNR==1 {
     print FILENAME > "/dev/stderr";
 }
-filetype=="xml" && FNR==startLineNumber && /^<\?/ {
+filetype=="xml" && FNR==startLineNumber && /^.*<\?/ {
     # first line of xml
     print "** found xml <? > line **" > "/dev/stderr";
+    # at least one xml has root tag on starting line
+    if($0 ~ /<report/) {
+        print "** found <report on start line **" > "/dev/stderr"
+        reportFound = 1;
+        exit 4;
+    }
     print $0;
     startLineNumber=startLineNumber+1;
     next;
+}
+filetype=="xml" && FNR==startLineNumber && $0 == "" {
+    # blank line after first line of xml
+    print "** blank line after first line in **" > "/dev/stderr";
+    print $0;
+    startLineNumber=startLineNumber+1;
+    next;
+}
+filetype=="xml" && FNR==startLineNumber && /^<!-- Written by/ {
+    # comment in test files
+    print "** found xml comment line **" > "/dev/stderr";
+    print $0;
+    startLineNumber=startLineNumber+1;
+    next;
+}
+### can find <library in plugin.xml file
+filetype=="xml" && FNR==startLineNumber && (/^<report/ || /^<library / || /^<structure/ || /^<model:/) {
+    print "** found <report **" > "/dev/stderr";
+    reportFound = 1;
+    exit 4;
 }
 filetype=="java" && FNR==2 && 
     match($0, /^ \* Copyright \([cC]\) ([0-9, ]+) ([A-Za-z. ]+) All rights reserved\./, a) {
@@ -259,11 +286,11 @@ commentLineCount==0 {
     next;
 }
 END {
-    if(commentLineCount>0) {
+    if(commentLineCount > 0 && reportFound == 0) {
         print "** ERROR: end of comment not found **" > "/dev/stderr";
         exit 1;
     }
-    if(copyrightFound==0) {
+    if(copyrightFound == 0 && reportFound == 0) {
         print "** copyright not found. will run again and force default copyright **" > "/dev/stderr";
         exit 3;
     }

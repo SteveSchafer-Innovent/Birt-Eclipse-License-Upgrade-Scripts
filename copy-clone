@@ -1,0 +1,21 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+DIR="$1"
+if [ -z "$DIR" ]; then
+  DIR="$(./default-birt-directory)"
+fi
+PARENT=$(dirname $DIR)
+TEMP="$PARENT/$TIMESTAMP"
+mkdir -p "$TEMP"
+mv "$DIR/.git" "$TEMP"
+mv "$DIR/.github" "$TEMP"
+BACKUP="$PARENT/backup/$TIMESTAMP"
+mkdir -p "$BACKUP"
+mv "$DIR" "$BACKUP"
+ROOT=$(dirname $PARENT)
+cp -r "$ROOT/birt-clone/birt" "$PARENT"
+rm -rf "$DIR/.git"
+rm -rf "$DIR/.github"
+mv "$TEMP/.git" "$DIR"
+mv "$TEMP/.github" "$DIR"

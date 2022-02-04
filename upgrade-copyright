@@ -35,6 +35,12 @@ for FILE in "${FILES[@]}"; do
 							 -f copyright.awk epl2/license-comment.txt "$BACKUP_FILE" > "$FILE"; then
 							rm "$BACKUP_FILE"
 						fi
+					else
+						if (($ERROR == 4)); then
+							# don't change this file
+							echo "restoring backup file" >> "/dev/stderr"
+							mv "$BACKUP_FILE" "$FILE"
+						fi
 					fi
 				fi
 			fi

@@ -1,0 +1,21 @@
+#!/bin/sh
+cd "$(dirname "${BASH_SOURCE[0]}")"
+DIR="$1"
+if [ -z "$DIR" ]; then
+	DIR="$(./default-birt-directory)"
+fi
+readarray -d '' FILES < <(find "$DIR"\
+ -name "*.xml"\
+ -not -path '*/.*'\
+ -type f -print0)
+for FILE in "${FILES[@]}"; do
+	if [ -f "$FILE" ]; then
+		if SEARCH_RESULT=$(grep "^ *<report" "$FILE"); then
+			if SEARCH_RESULT=$(grep "All rights reserved" "$FILE"); then
+				echo "$FILE"
+			fi
+		fi
+	else
+		echo "not found: $FILE" > find-report-xmls.err.log
+	fi
+done

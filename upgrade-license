@@ -1,16 +1,18 @@
 #!/bin/sh
 cd "$(dirname "${BASH_SOURCE[0]}")"
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 DIR="$1"
 if [ -z "$DIR" ]; then
   DIR="$(./default-birt-directory)"
 fi
 TEST="$2"
-for FILE in $(find $DIR -name "*_backup_*"); do rm $FILE; done
-cp ./epl2/license.txt $DIR/LICENSE
-cp ./changed-files/RepoGen.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
-cp ./changed-files/FileInfo.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
-cp ./changed-files/ExternalDependency.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
-cp ./changed-files/ViewservletRepoGen.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+if [ -z "$TEST" ]; then
+	cp ./epl2/license.txt $DIR/LICENSE
+	cp ./changed-files/RepoGen.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+	cp ./changed-files/FileInfo.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+	cp ./changed-files/ExternalDependency.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+	cp ./changed-files/ViewservletRepoGen.java $DIR/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen
+fi
 ./upgrade-license-html "$@"
 ./upgrade-epl-html "$@"
 ./upgrade-feature-properties "$@"
